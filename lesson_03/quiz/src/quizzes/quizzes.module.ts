@@ -6,6 +6,7 @@ import { BenjaminScottQuiz } from './benjamin_scott_quiz.js';
 import { TrinitieJacksonQuiz } from './trinitie_jackson_quiz.js';
 import { TyranRicesQuiz } from './tyran_rices_quiz.js';
 import { BrooklynHardenQuiz } from './brooklyn_harden_quiz.js';
+import { EvanderBlueQuiz } from './evander_blue_quiz.js';
 export const Quizzes = Symbol.for('Quizzes');
 
 // Add your quiz provider here.
@@ -20,7 +21,8 @@ const QUIZ_PROVIDERS = [
   TyranRicesQuiz,
   AnotherQuiz,
   BenjaminScottQuiz,
-  DanielsonAdjocyQuiz
+  DanielsonAdjocyQuiz,
+  EvanderBlueQuiz
 ];
 
 
