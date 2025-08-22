@@ -4,7 +4,7 @@ import markdown
 # This function converts Markdown code into HTML code
 
 
-def convert_md_to_html(input_file, output_file):
+def markdownConversion(input_file, output_file):
     with open(input_file, 'r', encoding="utf-8") as f:
         # reads the content of the markdown file
         markdown_content = f.read()
@@ -25,4 +25,4 @@ if __name__ == "__main__":
     parser.add_argument("output", help="Output HTML file")
 
     args = parser.parse_args()
-    convert_md_to_html(args.input, args.output)
+    markdownConversion(args.input, args.output)
