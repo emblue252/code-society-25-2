@@ -9,7 +9,9 @@ public class Stack {
   }
 
   public void push(int value) {
-    // Your code here
+  ListNode newNode = new ListNode(value);
+  newNode.next = top;
+  top = newNode;
   }
 
   public int pop() {
