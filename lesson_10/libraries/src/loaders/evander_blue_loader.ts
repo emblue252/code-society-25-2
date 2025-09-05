@@ -12,34 +12,24 @@ export class EvanderBlueLoader implements Loader {
     const credits = await this.loadCredits();
     const mediaItems = await this.loadMediaItems();
 
-    // Merge credits into media items by id (for extra credit)
-    const creditsById = new Map();
+    // Add credits to existing media items using addCredit method
+    const mediaItemMap = new Map();
+    for (const item of mediaItems) {
+      mediaItemMap.set(item.getId(), item);
+    }
     for (const credit of credits) {
       const id = credit.getMediaItemId();
-      if (!creditsById.has(id)) {
-        creditsById.set(id, []);
+      const item = mediaItemMap.get(id);
+      if (item && typeof item.addCredit === 'function') {
+        item.addCredit(credit);
       }
-      creditsById.get(id).push(credit);
     }
-
-    const mergedMediaItems = mediaItems.map((item) => {
-      const id = item.getId();
-      const itemCredits = creditsById.get(id) || [];
-      // Use public getters only, do not change MediaItem class
-      return new MediaItem(
-        id,
-        item.getTitle(),
-        item.getType(),
-        item.getReleaseYear(),
-        itemCredits,
-      );
-    });
 
     console.log(
       `Loaded ${credits.length} credits and ${mediaItems.length} media items`,
     );
 
-    return mergedMediaItems;
+    return Array.from(mediaItemMap.values());
   }
 
   async loadMediaItems(): Promise<MediaItem[]> {
